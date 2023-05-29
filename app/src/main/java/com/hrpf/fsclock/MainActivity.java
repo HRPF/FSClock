@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toast.makeText(this, "哈哈，我成功启动了！", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "开机自启成功", Toast.LENGTH_LONG).show();
         TextClock hh = (TextClock) findViewById(R.id.hh);
         TextClock aa = (TextClock) findViewById(R.id.aa);
         TextClock mm = (TextClock) findViewById(R.id.mm);
@@ -32,9 +32,8 @@ public class MainActivity extends AppCompatActivity {
         aa.setFormat12Hour("aa");
         mm.setFormat12Hour("mm");
         ss.setFormat12Hour("ss");
-
-
     }
+
     @Override
     protected void onResume() {//强制横屏
         if (getRequestedOrientation() != ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
@@ -43,10 +42,6 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
     }
 
-
-
-
-
     @Override
     public void onWindowFocusChanged(boolean hasFocus){
         super.onWindowFocusChanged(hasFocus);
@@ -54,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
             hideSystemUI();
         }
     }
+
     private void hideSystemUI() {//隐藏系统UI
         // Enables regular immersive mode.
         // For "lean back" mode, remove SYSTEM_UI_FLAG_IMMERSIVE.
