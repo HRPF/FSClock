@@ -57,15 +57,6 @@
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="30dp"/>
 
-    <Button
-        android:id="@+id/test_activity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Start Activity"
-        app:layout_constraintRight_toRightOf="parent"
-        android:onClick="startTestActivity"
-        />
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,10 +3,12 @@ package com.hrpf.fsclock;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.TextClock;
 import android.widget.Toast;
@@ -24,14 +26,29 @@ public class MainActivity extends AppCompatActivity {
         TextClock ss = (TextClock) findViewById(R.id.ss);
 
         AssetManager assets = getAssets();
-        Typeface fromAsset = Typeface.createFromAsset(assets, "BebasNeueRegular.ttf");
-        hh.setTypeface(fromAsset);
-        mm.setTypeface(fromAsset);
-        ss.setTypeface(fromAsset);
-        hh.setFormat12Hour("hh");
-        aa.setFormat12Hour("aa");
-        mm.setFormat12Hour("mm");
-        ss.setFormat12Hour("ss");
+        Typeface typeface = Typeface.createFromAsset(assets, "BebasNeueRegular.ttf");
+        hh.setTypeface(typeface);
+        mm.setTypeface(typeface);
+        ss.setTypeface(typeface);
+
+        // FIXED: 在不同时间格式下显示不对
+        boolean is24 = DateFormat.is24HourFormat(this);
+        if(is24){
+            hh.setFormat24Hour("hh");
+            aa.setFormat24Hour("aa");
+            mm.setFormat24Hour("mm");
+            ss.setFormat24Hour("ss");
+        } else {
+            hh.setFormat12Hour("hh");
+            aa.setFormat12Hour("aa");
+            mm.setFormat12Hour("mm");
+            ss.setFormat12Hour("ss");
+        }
+    }
+
+    public void startTestActivity(View view){
+        Intent intent = new Intent(this, ViewPagerTest.class);
+        startActivity(intent);
     }
 
     @Override
