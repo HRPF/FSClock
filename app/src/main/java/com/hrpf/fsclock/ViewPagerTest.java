@@ -45,7 +45,7 @@ public class ViewPagerTest extends FragmentActivity{
         // 生成Fragment列表数据源
         fragmentList = new ArrayList<>();
         DigitalClockFragment fgm1 = DigitalClockFragment.newInstance("fgm1", "");
-        BlankFragment fgm2 = BlankFragment.newInstance("fgm2", "");
+        AnalogClockFragment fgm2 = AnalogClockFragment.newInstance("fgm2", "");
         BlankFragment fgm3 = BlankFragment.newInstance("fgm3", "");
         fragmentList.add(fgm1);
         fragmentList.add(fgm2);
