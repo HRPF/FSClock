@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">FSClock</string>
+    <string name="mark_width">刻度粗细:</string>
+    <string name="mark_length">刻度长度:</string>
+    <string name="mark_quarter_color">刻度线颜色(一刻钟):</string>
+    <string name="mark_min_color">刻度线颜色(五分钟):</string>
+    <string name="pointer_hour_color">时针颜色:</string>
+    <string name="pointer_min_color">分针颜色:</string>
+    <string name="pointer_sec_color">秒针颜色:</string>
+    <string name="pointer_center">指针圆心:</string>
+    <string name="dial_color">表盘颜色:</string>
+
+    <string name="hint_mark_width">调整表盘刻度线的宽度</string>
+    <string name="hint_mark_length">调整表盘刻度线的长度</string>
+    <string name="hint_mark_quarter_color">调整每一刻钟刻度的颜色</string>
+    <string name="hint_mark_min_color">调整其他刻度的颜色</string>
+    <string name="hint_pointer_hour_color">调整时针颜色</string>
+    <string name="hint_pointer_min_color">调整分针颜色</string>
+    <string name="hint_pointer_sec_color">调整秒针颜色</string>
+    <string name="hint_pointer_center">是否启用指针圆心</string>
+    <string name="hint_dial_color">调整表盘颜色</string>
 </resources>

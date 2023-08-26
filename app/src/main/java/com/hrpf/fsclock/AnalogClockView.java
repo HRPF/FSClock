@@ -48,7 +48,7 @@ public class AnalogClockView extends View {
     private int mSecondColor = Color.RED;//秒针的颜色
     private int mQuarterMarkColor = Color.parseColor("#B5B5B5");//一刻钟刻度线的颜色
     private int mMinuteMarkColor = Color.parseColor("#EBEBEB");//分钟刻度线的颜色
-    private boolean isDrawCenterCircle = false;//是否绘制3个指针的圆心
+    private boolean isDrawCenterCircle = true;//是否绘制3个指针的圆心
 
     //获取时间监听
     private OnCurrentTimeListener onCurrentTimeListener;
@@ -254,6 +254,18 @@ public class AnalogClockView extends View {
             return df.format(i);
         } else {
             return i + "";
+        }
+    }
+
+    // 重绘
+    public void applyModify(){
+        invalidate();
+    }
+    // 设置表盘颜色
+    public void setDialColor(String color){
+        int newColor = Color.parseColor(color);
+        if (newColor != mCircleColor){
+            mCircleColor = newColor;
         }
     }
 }
