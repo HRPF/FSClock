@@ -57,7 +57,6 @@
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="30dp"/>
 
-    <!--TODO: 添加设置按钮-->
     <ImageButton
         android:src="@drawable/gear_bd"
         android:background="#00000000"

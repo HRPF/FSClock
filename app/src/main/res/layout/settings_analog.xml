@@ -26,9 +26,8 @@
                 android:id="@+id/dial_color"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autofillHints="调整表盘颜色"
                 android:hint="@string/hint_dial_color"
-                android:inputType="number"
+                android:digits="#0123456789ABCDEFabcdef"
                 android:textSize="16sp" />
         </LinearLayout>
 
@@ -46,7 +45,6 @@
                 android:id="@+id/mark_width"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autofillHints="调整表盘刻度线的宽度"
                 android:hint="@string/hint_mark_width"
                 android:inputType="number"
                 android:textSize="16sp" />
@@ -66,7 +64,6 @@
                 android:id="@+id/mark_length"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autofillHints="调整表盘刻度线的长度"
                 android:hint="@string/hint_mark_length"
                 android:inputType="number"
                 android:textSize="16sp" />
@@ -86,9 +83,8 @@
                 android:id="@+id/mark_quarter_color"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autofillHints="调整每一刻钟刻度的颜色"
                 android:hint="@string/hint_mark_quarter_color"
-                android:inputType="number"
+                android:digits="#0123456789ABCDEFabcdef"
                 android:textSize="16sp" />
         </LinearLayout>
 
@@ -106,9 +102,8 @@
                 android:id="@+id/mark_min_color"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autofillHints="调整其他刻度的颜色"
                 android:hint="@string/hint_mark_min_color"
-                android:inputType="number"
+                android:digits="#0123456789ABCDEFabcdef"
                 android:textSize="16sp" />
         </LinearLayout>
 
@@ -126,9 +121,8 @@
                 android:id="@+id/pointer_hour_color"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autofillHints="调整时针颜色"
                 android:hint="@string/hint_pointer_hour_color"
-                android:inputType="number"
+                android:digits="#0123456789ABCDEFabcdef"
                 android:textSize="16sp" />
         </LinearLayout>
 
@@ -146,9 +140,8 @@
                 android:id="@+id/pointer_min_color"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autofillHints="调整分针颜色"
                 android:hint="@string/hint_pointer_min_color"
-                android:inputType="number"
+                android:digits="#0123456789ABCDEFabcdef"
                 android:textSize="16sp" />
         </LinearLayout>
 
@@ -166,9 +159,65 @@
                 android:id="@+id/pointer_sec_color"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autofillHints="调整秒针颜色"
                 android:hint="@string/hint_pointer_sec_color"
-                android:inputType="number"
+                android:digits="#0123456789ABCDEFabcdef"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pointer_hour_width">
+            </TextView>
+
+            <EditText
+                android:id="@+id/pointer_hour_width"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_pointer_hour_width"
+                android:digits="#0123456789ABCDEFabcdef"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pointer_min_width">
+            </TextView>
+
+            <EditText
+                android:id="@+id/pointer_min_width"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_pointer_min_width"
+                android:digits="#0123456789ABCDEFabcdef"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pointer_sec_width">
+            </TextView>
+
+            <EditText
+                android:id="@+id/pointer_sec_width"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_pointer_sec_width"
+                android:digits="#0123456789ABCDEFabcdef"
                 android:textSize="16sp" />
         </LinearLayout>
 
@@ -182,9 +231,9 @@
                 android:text="@string/pointer_center" />
 
             <Switch
+                android:id="@+id/draw_center_circle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
-
             </Switch>
         </LinearLayout>
 

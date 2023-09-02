@@ -7,6 +7,9 @@
     <string name="pointer_hour_color">时针颜色:</string>
     <string name="pointer_min_color">分针颜色:</string>
     <string name="pointer_sec_color">秒针颜色:</string>
+    <string name="pointer_hour_width">时针宽度:</string>
+    <string name="pointer_min_width">分针宽度:</string>
+    <string name="pointer_sec_width">秒针宽度:</string>
     <string name="pointer_center">指针圆心:</string>
     <string name="dial_color">表盘颜色:</string>
 
@@ -17,6 +20,10 @@
     <string name="hint_pointer_hour_color">调整时针颜色</string>
     <string name="hint_pointer_min_color">调整分针颜色</string>
     <string name="hint_pointer_sec_color">调整秒针颜色</string>
+    <string name="hint_pointer_hour_width">调整时针宽度</string>
+    <string name="hint_pointer_min_width">调整分针宽度</string>
+    <string name="hint_pointer_sec_width">调整秒针宽度</string>
     <string name="hint_pointer_center">是否启用指针圆心</string>
     <string name="hint_dial_color">调整表盘颜色</string>
+    <string name="ana_setbutton_desc">模拟时钟设置</string>
 </resources>

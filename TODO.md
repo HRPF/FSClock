@@ -1,0 +1,3 @@
+- 设置性能优化：添加TextWatchers
+- switch控件值获取：OnCheckedChangeListener
+- 添加更多设置

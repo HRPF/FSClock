@@ -9,21 +9,17 @@
     android:keepScreenOn="true"
     tools:context=".AnalogClockFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="24dp">
         <com.hrpf.fsclock.AnalogClockView
+            android:id="@+id/analog_clock"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         </com.hrpf.fsclock.AnalogClockView>
     </FrameLayout>
 
-    <!--TODO: 添加设置按钮-->
     <ImageButton
         android:id="@+id/bt_analog_settings"
         android:src="@drawable/gear_bd"
@@ -31,6 +27,7 @@
         android:layout_margin="18dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/ana_setbutton_desc"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent" >
     </ImageButton>

@@ -1,6 +1,8 @@
 package com.hrpf.fsclock;
 
 import android.content.Context;
+import android.icu.text.RelativeDateTimeFormatter;
+import android.util.Log;
 import android.view.View;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
@@ -9,18 +11,22 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.util.AttributeSet;
+import android.view.Window;
 
 import java.text.DecimalFormat;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.RecursiveTask;
 
 public class AnalogClockView extends View {
-    private final static int DEFAULT_SIZE = 400;//使用wrap_content时默认的尺寸
-    private final static int MARK_WIDTH = 8;//刻度线宽度
-    private final static int MARK_LENGTH = 20;//刻度线长度
-    private final static int MARK_GAP = 12;//刻度线与圆的间隙
-    private final static int HOUR_LINE_WIDTH = 10;//时针宽度
-    private final static int MINUTE_LINE_WIDTH = 6;//分针宽度
-    private final static int SECOND_LINE_WIDTH = 4;//秒针宽度
+    private final int DEFAULT_SIZE = 400;//使用wrap_content时默认的尺寸
+    private int MARK_WIDTH = 8;//刻度线宽度
+    private int MARK_LENGTH = 20;//刻度线长度
+    private int MARK_GAP = 16;//刻度线与圆的间隙
+    private int HOUR_LINE_WIDTH = 10;//时针宽度
+    private int MINUTE_LINE_WIDTH = 6;//分针宽度
+    private int SECOND_LINE_WIDTH = 4;//秒针宽度
     private int centerX;//圆心坐标
     private int centerY;
 
@@ -49,6 +55,8 @@ public class AnalogClockView extends View {
     private int mQuarterMarkColor = Color.parseColor("#B5B5B5");//一刻钟刻度线的颜色
     private int mMinuteMarkColor = Color.parseColor("#EBEBEB");//分钟刻度线的颜色
     private boolean isDrawCenterCircle = true;//是否绘制3个指针的圆心
+
+    private static HashMap<String, Integer> map;
 
     //获取时间监听
     private OnCurrentTimeListener onCurrentTimeListener;
@@ -261,11 +269,93 @@ public class AnalogClockView extends View {
     public void applyModify(){
         invalidate();
     }
-    // 设置表盘颜色
-    public void setDialColor(String color){
-        int newColor = Color.parseColor(color);
-        if (newColor != mCircleColor){
-            mCircleColor = newColor;
-        }
+
+    public void setmCircleColor(int mCircleColor){
+        this.mCircleColor = mCircleColor;
+        circlePaint.setColor(this.mCircleColor);
     }
+    public void setMARK_WIDTH(int MARK_WIDTH){
+        this.MARK_WIDTH = MARK_WIDTH;
+        markPaint.setStrokeWidth(this.MARK_WIDTH);
+    }
+    public void setMARK_LENGTH(int MARK_LENGTH){ //绘制时才使用
+        this.MARK_LENGTH = MARK_LENGTH;
+    }
+    public void setmQuarterMarkColor(int mQuarterMarkColor){ //绘制时才使用
+        this.mQuarterMarkColor = mQuarterMarkColor;
+    }
+    public void setmMinuteMarkColor(int mMinuteMarkColor){ //绘制时才使用
+        this.mMinuteMarkColor = mMinuteMarkColor;
+    }
+    public void setMARK_GAP(int MARK_GAP){ //绘制时才使用
+        this.MARK_GAP = MARK_GAP;
+    }
+    public void setmHourColor(int mHourColor){
+        this.mHourColor = mHourColor;
+        hourPaint.setColor(this.mHourColor);
+    }
+    public void setmMinuteColor(int mMinuteColor){
+        this.mMinuteColor = mMinuteColor;
+        minutePaint.setColor(this.mMinuteColor);
+    }
+    public void setmSecondColor(int mSecondColor){
+        this.mSecondColor = mSecondColor;
+    }
+    public void setHOUR_LINE_WIDTH(int HOUR_LINE_WIDTH){
+        this.HOUR_LINE_WIDTH = HOUR_LINE_WIDTH;
+        hourPaint.setStrokeWidth(this.HOUR_LINE_WIDTH);
+    }
+    public void setMINUTE_LINE_WIDTH(int MINUTE_LINE_WIDTH){
+        this.MINUTE_LINE_WIDTH = MINUTE_LINE_WIDTH;
+        minutePaint.setStrokeWidth(this.MINUTE_LINE_WIDTH);
+    }
+    public void setSECOND_LINE_WIDTH(int SECOND_LINE_WIDTH){
+        this.SECOND_LINE_WIDTH = SECOND_LINE_WIDTH;
+        secondPaint.setStrokeWidth(this.SECOND_LINE_WIDTH);
+    }
+    public void setisDrawCenterCircle(boolean isDrawCenterCircle){ //绘制时才使用
+        this.isDrawCenterCircle = isDrawCenterCircle;
+    }
+
+    // 提供数值获取接口，用于显示在设置对话框
+    public int getmCircleColor(){
+        return mCircleColor;
+    }
+    public int getMARK_WIDTH(){
+        return MARK_WIDTH;
+    }
+    public int getMARK_LENGTH(){
+        return MARK_LENGTH;
+    }
+    public int getmQuarterMarkColor(){
+       return mQuarterMarkColor;
+    }
+    public int getmMinuteMarkColor(){
+        return mMinuteMarkColor;
+    }
+    public int getMARK_GAP(){
+        return MARK_GAP;
+    }
+    public int getmHourColor(){
+        return mHourColor;
+    }
+    public int getmMinuteColor(){
+        return mMinuteColor;
+    }
+    public int getmSecondColor(){
+        return mSecondColor;
+    }
+    public int getHOUR_LINE_WIDTH(){
+        return HOUR_LINE_WIDTH;
+    }
+    public int getMINUTE_LINE_WIDTH(){
+        return MINUTE_LINE_WIDTH;
+    }
+    public int getSECOND_LINE_WIDTH(){
+        return SECOND_LINE_WIDTH;
+    }
+    public boolean getisDrawCenterCircle(){
+        return isDrawCenterCircle;
+    }
+
 }
