@@ -142,6 +142,9 @@ public class AnalogClockFragment extends Fragment {
         dialogInstance = settingsDialogWindow.create();
         dialogInstance.show();
     }
+    /*
+    从view获取数据并显示于对话框中
+     */
     private void setDialogValue(){
         EditText dial_color = settingsView.findViewById(R.id.dial_color);
         dial_color.setText(preferences.getString("mCircleColor", "#FFFFFF"));
@@ -151,6 +154,9 @@ public class AnalogClockFragment extends Fragment {
 
         EditText mark_length = settingsView.findViewById(R.id.mark_length);
         mark_length.setText(Integer.toString(clockView.getMARK_LENGTH()));
+
+        EditText mark_gap = settingsView.findViewById(R.id.mark_gap);
+        mark_gap.setText(Integer.toString(clockView.getMARK_GAP()));
 
         EditText mark_quarter_color = settingsView.findViewById(R.id.mark_quarter_color);
         mark_quarter_color.setText(String.format("#%06X", (0xFFFFFF & clockView.getmQuarterMarkColor())));
@@ -167,20 +173,33 @@ public class AnalogClockFragment extends Fragment {
         EditText pointer_sec_color = settingsView.findViewById(R.id.pointer_sec_color);
         pointer_sec_color.setText(String.format("#%06X", (0xFFFFFF & clockView.getmSecondColor())));
 
+        EditText pointer_hour_width = settingsView.findViewById(R.id.pointer_hour_width);
+        pointer_hour_width.setText(Integer.toString(clockView.getHOUR_LINE_WIDTH()));
+
+        EditText pointer_min_width = settingsView.findViewById(R.id.pointer_min_width);
+        pointer_min_width.setText(Integer.toString(clockView.getMINUTE_LINE_WIDTH()));
+
+        EditText pointer_sec_width = settingsView.findViewById(R.id.pointer_sec_width);
+        pointer_sec_width.setText(Integer.toString(clockView.getSECOND_LINE_WIDTH()));
+
         Switch draw_center_circle = settingsView.findViewById(R.id.draw_center_circle);
         draw_center_circle.setChecked(clockView.getisDrawCenterCircle());
     }
+    /*
+    从对话框中获取数据保存于sharedpreference中
+     */
     private void saveDialogValue(){
         EditText dial_color = settingsView.findViewById(R.id.dial_color);
         editor.putString("mCircleColor", dial_color.getText().toString());
-        Log.i("DEBUG", dial_color.getText().toString());
-        Log.i("DEBUG", preferences.getString("mCircleColor", "#FFFFFF"));
 
         EditText mark_width = settingsView.findViewById(R.id.mark_width);
         editor.putInt("MARK_WIDTH", Integer.parseInt(mark_width.getText().toString()));
 
         EditText mark_length = settingsView.findViewById(R.id.mark_length);
         editor.putInt("MARK_LENGTH", Integer.parseInt(mark_length.getText().toString()));
+
+        EditText mark_gap = settingsView.findViewById(R.id.mark_gap);
+        editor.putInt("MARK_GAP", Integer.parseInt(mark_gap.getText().toString()));
 
         EditText mark_quarter_color = settingsView.findViewById(R.id.mark_quarter_color);
         editor.putString("mQuarterMarkColor", mark_quarter_color.getText().toString());
@@ -196,6 +215,15 @@ public class AnalogClockFragment extends Fragment {
 
         EditText pointer_sec_color = settingsView.findViewById(R.id.pointer_sec_color);
         editor.putString("mSecondColor", pointer_sec_color.getText().toString());
+
+        EditText pointer_hour_width = settingsView.findViewById(R.id.pointer_hour_width);
+        editor.putInt("HOUR_LINE_WIDTH", Integer.parseInt(pointer_hour_width.getText().toString()));
+
+        EditText pointer_min_width = settingsView.findViewById(R.id.pointer_min_width);
+        editor.putInt("MINUTE_LINE_WIDTH", Integer.parseInt(pointer_min_width.getText().toString()));
+
+        EditText pointer_sec_width = settingsView.findViewById(R.id.pointer_sec_width);
+        editor.putInt("SECOND_LINE_WIDTH", Integer.parseInt(pointer_sec_width.getText().toString()));
 
 //        Switch draw_center_circle = settingsView.findViewById(R.id.draw_center_circle);
 //        editor.putString("isDrawCenterCircle", draw_center_circle.get);
@@ -220,21 +248,21 @@ public class AnalogClockFragment extends Fragment {
         clockView.setisDrawCenterCircle(preferences.getBoolean("isDrawCenterCircle", false));
     }
     /*
-    在sharedpreference不存在时才执行
+    sharedpreference不存在时才执行
      */
     private void createDefaultSharedPreferences(){
         editor.putBoolean("emptySP", false);
-        editor.putString("mCircleColor", "#FFFFFF");
-        editor.putInt("MARK_WIDTH", 16);
-        editor.putInt("MARK_LENGTH", 20);
-        editor.putString("mQuarterMarkColor","#B5B5B5");
-        editor.putString("mMinuteMarkColor", "#EBEBEB");
+        editor.putString("mCircleColor", "#000000");
+        editor.putInt("MARK_WIDTH", 24);
+        editor.putInt("MARK_LENGTH", 24);
+        editor.putString("mQuarterMarkColor","#EBEBEB");
+        editor.putString("mMinuteMarkColor", "#A0A0A0");
         editor.putInt("MARK_GAP", 16);
-        editor.putString("mHourColor", "#000000");
-        editor.putString("mMinuteColor", "#000000");
+        editor.putString("mHourColor", "#FFFFFF");
+        editor.putString("mMinuteColor", "#DDDDDD");
         editor.putString("mSecondColor", "#FF0000");
-        editor.putInt("HOUR_LINE_WIDTH", 10);
-        editor.putInt("MINUTE_LINE_WIDTH", 6);
+        editor.putInt("HOUR_LINE_WIDTH", 24);
+        editor.putInt("MINUTE_LINE_WIDTH", 12);
         editor.putInt("SECOND_LINE_WIDTH", 4);
         editor.putBoolean("isDrawCenterCircle", false);
         editor.apply();
