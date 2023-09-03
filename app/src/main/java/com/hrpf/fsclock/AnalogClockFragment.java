@@ -192,7 +192,7 @@ public class AnalogClockFragment extends Fragment {
         editor.putString("mHourColor", pointer_hour_color.getText().toString());
 
         EditText pointer_min_color = settingsView.findViewById(R.id.pointer_min_color);
-        editor.putString("mHourColor", pointer_min_color.getText().toString());
+        editor.putString("mMinuteColor", pointer_min_color.getText().toString());
 
         EditText pointer_sec_color = settingsView.findViewById(R.id.pointer_sec_color);
         editor.putString("mSecondColor", pointer_sec_color.getText().toString());
