@@ -1,5 +1,32 @@
 <resources>
     <string name="app_name">FSClock</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="mark_width">刻度粗细:</string>
+    <string name="mark_length">刻度长度:</string>
+    <string name="mark_quarter_color">刻度线颜色(一刻钟):</string>
+    <string name="mark_min_color">刻度线颜色(五分钟):</string>
+    <string name="pointer_hour_color">时针颜色:</string>
+    <string name="pointer_min_color">分针颜色:</string>
+    <string name="pointer_sec_color">秒针颜色:</string>
+    <string name="pointer_hour_width">时针宽度:</string>
+    <string name="pointer_min_width">分针宽度:</string>
+    <string name="pointer_sec_width">秒针宽度:</string>
+    <string name="pointer_center">指针圆心:</string>
+    <string name="dial_color">表盘颜色:</string>
+    <string name="mark_gap">刻度距离:</string>
+
+    <string name="hint_mark_width">调整表盘刻度线的宽度</string>
+    <string name="hint_mark_length">调整表盘刻度线的长度</string>
+    <string name="hint_mark_quarter_color">调整每一刻钟刻度的颜色</string>
+    <string name="hint_mark_min_color">调整其他刻度的颜色</string>
+    <string name="hint_pointer_hour_color">调整时针颜色</string>
+    <string name="hint_pointer_min_color">调整分针颜色</string>
+    <string name="hint_pointer_sec_color">调整秒针颜色</string>
+    <string name="hint_pointer_hour_width">调整时针宽度</string>
+    <string name="hint_pointer_min_width">调整分针宽度</string>
+    <string name="hint_pointer_sec_width">调整秒针宽度</string>
+    <string name="hint_pointer_center">是否启用指针圆心</string>
+    <string name="hint_dial_color">调整表盘颜色</string>
+    <string name="ana_setbutton_desc">模拟时钟设置</string>
+    <string name="mark_gap_hint">调整刻度线与表盘边缘的距离</string>
+
 </resources>

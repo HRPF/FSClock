@@ -1,6 +1,7 @@
 package com.hrpf.fsclock;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,7 +13,6 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +33,6 @@ public class ViewPagerTest extends FragmentActivity{
     // 生成Fragment列表数据源
     private List<Fragment> fragmentList;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +44,7 @@ public class ViewPagerTest extends FragmentActivity{
         // 生成Fragment列表数据源
         fragmentList = new ArrayList<>();
         DigitalClockFragment fgm1 = DigitalClockFragment.newInstance("fgm1", "");
-        BlankFragment fgm2 = BlankFragment.newInstance("fgm2", "");
+        AnalogClockFragment fgm2 = AnalogClockFragment.newInstance("fgm2", "");
         BlankFragment fgm3 = BlankFragment.newInstance("fgm3", "");
         fragmentList.add(fgm1);
         fragmentList.add(fgm2);
@@ -74,14 +73,15 @@ public class ViewPagerTest extends FragmentActivity{
 
     @Override
     public void onBackPressed() {
-        if (viewPager.getCurrentItem() == 0) {
-            // If the user is currently looking at the first step, allow the system to handle the
-            // Back button. This calls finish() on this activity and pops the back stack.
-            super.onBackPressed();
-        } else {
-            // Otherwise, select the previous step.
-            viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
-        }
+        super.onBackPressed();
+//        if (viewPager.getCurrentItem() == 0) {
+//            // If the user is currently looking at the first step, allow the system to handle the
+//            // Back button. This calls finish() on this activity and pops the back stack.
+//            super.onBackPressed();
+//        } else {
+//            // Otherwise, select the previous step.
+//            viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
+//        }
     }
 
     /**
