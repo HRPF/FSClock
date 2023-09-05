@@ -10,7 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FSClock">
-        <activity android:name=".MainActivity">
+        <activity android:name=".ViewPagerTest">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,7 +18,7 @@
 
             </intent-filter>
         </activity>
-        <activity android:name=".ViewPagerTest"></activity>
+        <activity android:name=".MainActivity"></activity>
         <receiver
             android:name=".StartReceiver"
             android:enabled="true"
