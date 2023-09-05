@@ -123,6 +123,7 @@ public class AnalogClockView extends View {
         //绘制圆
         canvas.drawCircle(centerX, centerY, radius, circlePaint);
         //绘制刻度线
+        //TODO 分别绘制分钟刻度和时刻刻度
         for (int i = 0; i < 12; i++) {
             if (i % 3 == 0) {//一刻钟
                 markPaint.setColor(mQuarterMarkColor);
