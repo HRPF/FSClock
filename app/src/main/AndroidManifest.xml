@@ -10,7 +10,7 @@
         android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.FSClock">
-        <activity android:name=".ViewPagerTest">
+        <activity android:name=".ViewPager">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

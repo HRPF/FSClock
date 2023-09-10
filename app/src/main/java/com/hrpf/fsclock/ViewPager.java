@@ -1,12 +1,7 @@
 package com.hrpf.fsclock;
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -17,7 +12,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ViewPagerTest extends FragmentActivity{
+public class ViewPager extends FragmentActivity{
 
     /**
      * The pager widget, which handles animation and allows swiping horizontally to access previous
