@@ -1,3 +1,21 @@
-- 设置性能优化：添加TextWatchers
-- switch控件值获取：OnCheckedChangeListener
-- 添加更多设置
+- 模拟时钟：
+  - 刻度线长度和宽度分开设置
+  - switch控件值获取：OnCheckedChangeListener
+  - 添加TextWatchers
+  - 日期显示
+- 应用设置
+  - UI实现
+  - 启动界面选择
+  - 开机自启开关
+- WebView
+  - 开关？
+  - 设置按钮
+  - URL设置
+  - 下拉刷新
+- 其他
+  - 天气
+  - 日历
+  - 电脑解锁
+  - 亮度调节
+  - 屏保
+  - 翻译
