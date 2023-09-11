@@ -41,7 +41,7 @@ public class ViewPager extends FragmentActivity{
         fragmentList = new ArrayList<>();
         DigitalClockFragment fgm1 = DigitalClockFragment.newInstance("fgm1", "");
         AnalogClockFragment fgm2 = AnalogClockFragment.newInstance("fgm2", "");
-        WebviewFragment fgm4 = WebviewFragment.newInstance("web", "");
+        WebviewFragment fgm4 = WebviewFragment.newInstance("web", "https://cn.bing.com/");
         fragmentList.add(fgm1);
         fragmentList.add(fgm2);
         fragmentList.add(fgm4);

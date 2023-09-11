@@ -1,7 +1,14 @@
 package com.hrpf.fsclock;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -9,6 +16,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.EditText;
+import android.widget.ImageButton;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +34,13 @@ public class WebviewFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private SharedPreferences preferences;
+    private SharedPreferences.Editor editor;
+    private String URL = "https://cn.bing.com/";
+    private View settingsView;
+    private ImageButton settingsButton;
+    private AlertDialog dialogInstance;
+    private WebView webView;
 
     public WebviewFragment() {
         // Required empty public constructor
@@ -53,29 +69,89 @@ public class WebviewFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            mParam2 = getArguments().getString(ARG_PARAM1);
         }
+        preferences = requireActivity().getSharedPreferences("web_settings_sp", Context.MODE_PRIVATE);
+        editor = preferences.edit();
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootview = inflater.inflate(R.layout.fragment_webview, container, false);
-        WebView webView = rootview.findViewById(R.id.remote_sensor);
+        webView = rootview.findViewById(R.id.remote_sensor);
+        editor.putBoolean("emptySP", false);
+        if(preferences.contains("emptySP")){
+            this.URL = preferences.getString("URL", "https://cn.bing.com/");
+        } else {
+            editor.putBoolean("emptySP", false);
+            editor.putString("URL", "https://cn.bing.com/");
+            editor.apply();
+        }
         // 直接通过WebView显示网页
         webView.setWebViewClient(new WebViewClient(){
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 //使用WebView加载显示url
                 view.loadUrl(url);
-                //返回true
                 return true;
             }
         });
-        webView.loadUrl("https://cn.bing.com/");
+        webView.loadUrl(URL);
         // 启用javascript
         webView.getSettings().setJavaScriptEnabled(true);  //设置WebView属性,运行执行js脚本
         return rootview;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        settingsView = getLayoutInflater().inflate(R.layout.settings_web, null, false);
+        settingsButton = getView().findViewById(R.id.bt_webview_settings);
+        settingsButton.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        onSettings();
+                    }
+                }
+        );
+    }
+
+    private void onSettings() {
+        if (dialogInstance != null) {
+            dialogInstance.show();
+            return;
+        }
+        if (settingsView.getParent() != null) {
+            ((ViewGroup) settingsView.getParent()).removeView(settingsView);
+        }
+        AlertDialog.Builder settingsDialogWindow = new AlertDialog.Builder(getActivity());
+        settingsDialogWindow.setView(settingsView);
+        settingsDialogWindow.setTitle("监控设置");
+        EditText url_text = settingsView.findViewById(R.id.url_text);
+        url_text.setText(URL);
+        settingsDialogWindow.setPositiveButton("保存", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                // 响应保存按钮,刷新webview
+                EditText url_text = settingsView.findViewById(R.id.url_text);
+                editor.putString("URL", url_text.getText().toString());
+                webView.loadUrl(url_text.getText().toString());
+                editor.apply();
+            }
+        });
+        settingsDialogWindow.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                // 响应取消按钮
+                dialogInstance.dismiss();
+                dialogInstance = null;
+            }
+        });
+        dialogInstance = settingsDialogWindow.create();
+        dialogInstance.show();
     }
 }
