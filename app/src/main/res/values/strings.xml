@@ -31,5 +31,6 @@
     <string name="mark_gap_hint">调整刻度线与表盘边缘的距离</string>
     <string name="monitor_button_desc">监控设置</string>
     <string name="url_hint">输入电脑的IP地址</string>
+    <string name="monitor_refresh_button_desc">刷新监控页面</string>
 
 </resources>
