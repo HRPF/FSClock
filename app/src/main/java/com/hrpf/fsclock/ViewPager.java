@@ -39,9 +39,11 @@ public class ViewPager extends FragmentActivity{
 
         // 生成Fragment列表数据源
         fragmentList = new ArrayList<>();
+        AppSettingsFragment fgm0 = AppSettingsFragment.newInstance();
         DigitalClockFragment fgm1 = DigitalClockFragment.newInstance("fgm1", "");
         AnalogClockFragment fgm2 = AnalogClockFragment.newInstance("fgm2", "");
         WebviewFragment fgm4 = WebviewFragment.newInstance("web", "https://cn.bing.com/");
+        fragmentList.add(fgm0);
         fragmentList.add(fgm1);
         fragmentList.add(fgm2);
         fragmentList.add(fgm4);
