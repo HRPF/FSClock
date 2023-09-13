@@ -3,6 +3,7 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
@@ -40,10 +41,10 @@ public class ViewPager extends FragmentActivity{
         fragmentList = new ArrayList<>();
         DigitalClockFragment fgm1 = DigitalClockFragment.newInstance("fgm1", "");
         AnalogClockFragment fgm2 = AnalogClockFragment.newInstance("fgm2", "");
-        BlankFragment fgm3 = BlankFragment.newInstance("fgm3", "");
+        WebviewFragment fgm4 = WebviewFragment.newInstance("web", "https://cn.bing.com/");
         fragmentList.add(fgm1);
         fragmentList.add(fgm2);
-        fragmentList.add(fgm3);
+        fragmentList.add(fgm4);
 
         // Viewpager2将根据适配器提供的fragment数量创建fragment
         pagerAdapter = new ScreenSlidePagerAdapter(this, fragmentList);
@@ -83,7 +84,7 @@ public class ViewPager extends FragmentActivity{
      * A simple pager adapter that represents 5 ScreenSlidePageFragment objects, in
      * sequence.
      */
-    private class ScreenSlidePagerAdapter extends FragmentStateAdapter {
+    private static class ScreenSlidePagerAdapter extends FragmentStateAdapter {
 
         // 数据，即多个Fragment
         private List<Fragment> mFragmentList;
@@ -96,6 +97,7 @@ public class ViewPager extends FragmentActivity{
         }
 
         // 根据索引找到对应的fragment
+        @NonNull
         @Override
         public Fragment createFragment(int position) {
             return mFragmentList.get(position);

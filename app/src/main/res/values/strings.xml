@@ -13,6 +13,7 @@
     <string name="pointer_center">指针圆心:</string>
     <string name="dial_color">表盘颜色:</string>
     <string name="mark_gap">刻度距离:</string>
+    <string name="url">地址URL:</string>
 
     <string name="hint_mark_width">调整表盘刻度线的宽度</string>
     <string name="hint_mark_length">调整表盘刻度线的长度</string>
@@ -28,5 +29,8 @@
     <string name="hint_dial_color">调整表盘颜色</string>
     <string name="ana_setbutton_desc">模拟时钟设置</string>
     <string name="mark_gap_hint">调整刻度线与表盘边缘的距离</string>
+    <string name="monitor_button_desc">监控设置</string>
+    <string name="url_hint">输入电脑的IP地址</string>
+    <string name="monitor_refresh_button_desc">刷新监控页面</string>
 
 </resources>
