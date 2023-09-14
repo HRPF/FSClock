@@ -1,34 +1,59 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory app:title="@string/messages_header">
-
-        <EditTextPreference
-            app:key="signature"
-            app:title="@string/signature_title"
-            app:useSimpleSummaryProvider="true" />
+    <PreferenceCategory app:title="@string/screen_header">
 
         <ListPreference
             app:defaultValue="reply"
-            app:entries="@array/reply_entries"
-            app:entryValues="@array/reply_values"
-            app:key="reply"
-            app:title="@string/reply_title"
+            app:entries="@array/home_screen_entries"
+            app:entryValues="@array/home_screen_values"
+            app:key="home_screen"
+            app:title="@string/home_screen_title"
             app:useSimpleSummaryProvider="true" />
+
+        <SwitchPreferenceCompat
+            app:key="on_off_timer"
+            app:title="定时熄屏/亮屏"
+            app:summary="时间格式为HH:MM，24小时制" />
+        <EditTextPreference
+            app:title="熄屏时间"
+            app:dependency="on_off_timer"
+            app:key="screen_off_time"
+            app:useSimpleSummaryProvider="true" />
+        <EditTextPreference
+            app:title="亮屏时间"
+            app:dependency="on_off_timer"
+            app:key="screen_on_time"
+            app:useSimpleSummaryProvider="true" />
+
+        <SwitchPreferenceCompat
+            app:key="auto_brightness"
+            app:title="自动亮度" />
+        <SwitchPreferenceCompat
+            app:key="cover_system_brightness"
+            app:dependency="auto_brightness"
+            app:title="覆盖系统亮度策略"
+            app:summaryOff="@string/cover_system_brightness_summary_off"
+            app:summaryOn="@string/cover_system_brightness_summary_on" />
+
+<!--        <EditTextPreference-->
+<!--            app:key="signature"-->
+<!--            app:title="@string/signature_title"-->
+<!--            app:useSimpleSummaryProvider="true" />-->
 
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="@string/sync_header">
+    <PreferenceCategory app:title="@string/other_settings_header">
 
-        <SwitchPreferenceCompat
-            app:key="sync"
-            app:title="@string/sync_title" />
+<!--        <SwitchPreferenceCompat-->
+<!--            app:key="sync"-->
+<!--            app:title="@string/sync_title" />-->
 
-        <SwitchPreferenceCompat
-            app:dependency="sync"
-            app:key="attachment"
-            app:summaryOff="@string/attachment_summary_off"
-            app:summaryOn="@string/attachment_summary_on"
-            app:title="@string/attachment_title" />
+<!--        <SwitchPreferenceCompat-->
+<!--            app:dependency="sync"-->
+<!--            app:key="attachment"-->
+<!--            app:summaryOff="@string/cover_system_brightness_summary_off"-->
+<!--            app:summaryOn="@string/cover_system_brightness_summary_on"-->
+<!--            app:title="@string/attachment_title" />-->
 
     </PreferenceCategory>
 
