@@ -2,13 +2,6 @@
 
     <PreferenceCategory app:title="@string/screen_header">
 
-        <ListPreference
-            app:defaultValue="reply"
-            app:entries="@array/home_screen_entries"
-            app:entryValues="@array/home_screen_values"
-            app:key="home_screen"
-            app:title="@string/home_screen_title"
-            app:useSimpleSummaryProvider="true" />
 
         <SwitchPreferenceCompat
             app:key="on_off_timer"
@@ -39,6 +32,23 @@
 <!--            app:key="signature"-->
 <!--            app:title="@string/signature_title"-->
 <!--            app:useSimpleSummaryProvider="true" />-->
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="页面设置">
+
+        <ListPreference
+            app:defaultValue="reply"
+            app:entries="@array/home_screen_entries"
+            app:entryValues="@array/home_screen_values"
+            app:key="home_screen"
+            app:title="@string/home_screen_title"
+            app:useSimpleSummaryProvider="true" />
+
+        <SwitchPreferenceCompat
+            app:key="enable_remote_sensor"
+            app:title="启用硬件监控屏幕" />
+
 
     </PreferenceCategory>
 

@@ -1,16 +1,27 @@
 package com.hrpf.fsclock;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceManager;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 
+import com.hrpf.fsclock.service.ScreenControlService;
+
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class ViewPager extends FragmentActivity{
@@ -28,10 +39,16 @@ public class ViewPager extends FragmentActivity{
 
     // 生成Fragment列表数据源
     private List<Fragment> fragmentList;
+    private Context appContext;
+    private SharedPreferences appPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // 保持屏幕常亮
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
         setContentView(R.layout.viewpager2);
 
         // Instantiate a ViewPager2 and a PagerAdapter.
@@ -51,6 +68,34 @@ public class ViewPager extends FragmentActivity{
         // Viewpager2将根据适配器提供的fragment数量创建fragment
         pagerAdapter = new ScreenSlidePagerAdapter(this, fragmentList);
         viewPager.setAdapter(pagerAdapter);
+
+        appContext = getApplicationContext();
+        appPreferences = PreferenceManager.getDefaultSharedPreferences(appContext);
+
+        // 使用AlarmManager定期触发ScreenControlService服务
+        // FIXME 第一次启动APP时会同时打开/关闭屏幕
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent offintent = new Intent(this, ScreenControlService.class);
+        // false表示灭屏，true表示亮屏
+        offintent.putExtra("screenStatus", false);
+        PendingIntent pendingIntent = PendingIntent.getService(this, 0, offintent, PendingIntent.FLAG_UPDATE_CURRENT);
+        // 设置定时任务，这里设置为每天早上7点执行一次
+        Calendar offcalendar = Calendar.getInstance();
+        offcalendar.set(Calendar.HOUR_OF_DAY, 23);
+        offcalendar.set(Calendar.MINUTE, 0);
+        offcalendar.set(Calendar.SECOND, 0);
+        long offTime = offcalendar.getTimeInMillis();
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, offTime, AlarmManager.INTERVAL_DAY, pendingIntent);
+
+        Intent onintent = new Intent(this, ScreenControlService.class);
+        onintent.putExtra("screenStatus", true);
+        PendingIntent pendingIntent2 = PendingIntent.getService(this, 1, onintent, PendingIntent.FLAG_UPDATE_CURRENT);
+        Calendar oncalendar = Calendar.getInstance();
+        oncalendar.set(Calendar.HOUR_OF_DAY, 7);
+        oncalendar.set(Calendar.MINUTE, 0);
+        oncalendar.set(Calendar.SECOND, 0);
+        long onTime = oncalendar.getTimeInMillis();
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, onTime, AlarmManager.INTERVAL_DAY, pendingIntent2);
     }
 
     @Override
