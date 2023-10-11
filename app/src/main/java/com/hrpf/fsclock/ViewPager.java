@@ -8,10 +8,12 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
@@ -54,23 +56,44 @@ public class ViewPager extends FragmentActivity{
         // Instantiate a ViewPager2 and a PagerAdapter.
         viewPager = findViewById(R.id.pager);
 
+        // 获取设置DefaultSharedPreferences
+        appPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
         // 生成Fragment列表数据源
         fragmentList = new ArrayList<>();
         AppSettingsFragment fgm0 = AppSettingsFragment.newInstance();
         DigitalClockFragment fgm1 = DigitalClockFragment.newInstance("fgm1", "");
         AnalogClockFragment fgm2 = AnalogClockFragment.newInstance("fgm2", "");
-        WebviewFragment fgm4 = WebviewFragment.newInstance("web", "https://cn.bing.com/");
+
         fragmentList.add(fgm0);
         fragmentList.add(fgm1);
         fragmentList.add(fgm2);
-        fragmentList.add(fgm4);
+
+        boolean enable_remote_sensor = appPreferences.getBoolean("enable_remote_sensor", false);
+        if(enable_remote_sensor) {
+            WebviewFragment fgm4 = WebviewFragment.newInstance("web", "https://cn.bing.com/");
+            fragmentList.add(fgm4);
+        }
 
         // Viewpager2将根据适配器提供的fragment数量创建fragment
         pagerAdapter = new ScreenSlidePagerAdapter(this, fragmentList);
         viewPager.setAdapter(pagerAdapter);
+        // 切换到默认页
+        switch (appPreferences.getString("home_screen", "digital_clk")){
+            case "digital_clk":
+                viewPager.setCurrentItem(1, false);
+                break;
+            case "analog_clk":
+                viewPager.setCurrentItem(2, false);
+                break;
+            case "remote_sensor":
+                if(enable_remote_sensor)
+                    viewPager.setCurrentItem(3, false);
+                else
+                    Toast.makeText(getApplicationContext(), "未启用硬件监控屏幕，当前主屏幕设置不生效", Toast.LENGTH_LONG).show();
+                break;
+        }
 
-        appContext = getApplicationContext();
-        appPreferences = PreferenceManager.getDefaultSharedPreferences(appContext);
 
         // 使用AlarmManager定期触发ScreenControlService服务
         // FIXME 第一次启动APP时会同时打开/关闭屏幕
