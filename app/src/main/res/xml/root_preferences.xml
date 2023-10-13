@@ -47,23 +47,18 @@
 
         <SwitchPreferenceCompat
             app:key="enable_remote_sensor"
-            app:title="启用硬件监控屏幕" />
+            app:title="启用硬件监控屏幕"
+            app:summaryOff="@string/need_restart"
+            app:summaryOn="@string/need_restart" />
 
 
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/other_settings_header">
 
-<!--        <SwitchPreferenceCompat-->
-<!--            app:key="sync"-->
-<!--            app:title="@string/sync_title" />-->
-
-<!--        <SwitchPreferenceCompat-->
-<!--            app:dependency="sync"-->
-<!--            app:key="attachment"-->
-<!--            app:summaryOff="@string/cover_system_brightness_summary_off"-->
-<!--            app:summaryOn="@string/cover_system_brightness_summary_on"-->
-<!--            app:title="@string/attachment_title" />-->
+        <SwitchPreferenceCompat
+            app:key="start_at_boot"
+            app:title="开机自启" />
 
     </PreferenceCategory>
 
