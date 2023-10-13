@@ -1,0 +1,13 @@
+<resources>
+    <string-array name="home_screen_entries">
+        <item>数字时钟</item>
+        <item>模拟时钟</item>
+        <item>电脑监控</item>
+    </string-array>
+
+    <string-array name="home_screen_values">
+        <item>digital_clk</item>
+        <item>analog_clk</item>
+        <item>remote_sensor</item>
+    </string-array>
+</resources>
