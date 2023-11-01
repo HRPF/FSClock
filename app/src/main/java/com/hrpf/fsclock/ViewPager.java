@@ -64,10 +64,12 @@ public class ViewPager extends FragmentActivity{
         AppSettingsFragment fgm0 = AppSettingsFragment.newInstance();
         DigitalClockFragment fgm1 = DigitalClockFragment.newInstance("fgm1", "");
         AnalogClockFragment fgm2 = AnalogClockFragment.newInstance("fgm2", "");
+        BlankFragment test_fgm = BlankFragment.newInstance("Test Fragment", "");
 
         fragmentList.add(fgm0);
         fragmentList.add(fgm1);
         fragmentList.add(fgm2);
+        fragmentList.add(test_fgm);
 
         boolean enable_remote_sensor = appPreferences.getBoolean("enable_remote_sensor", false);
         if(enable_remote_sensor) {

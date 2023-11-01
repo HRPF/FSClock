@@ -21,6 +21,7 @@ import java.util.concurrent.RecursiveTask;
 
 public class AnalogClockView extends View {
     private final int DEFAULT_SIZE = 400;//使用wrap_content时默认的尺寸
+    private int CIRCLE_WIDTH = 8;//表盘空心状态下外圈宽度
     private int MARK_WIDTH = 8;//刻度线宽度
     private int MARK_LENGTH = 20;//刻度线长度
     private int MARK_GAP = 16;//刻度线与圆的间隙
@@ -36,6 +37,7 @@ public class AnalogClockView extends View {
     private Paint hourPaint;//时针画笔
     private Paint minutePaint;//分针画笔
     private Paint secondPaint;//秒针画笔
+    private Paint numberPaint;//数字画笔
     private int hourLineLength;//时针长度
     private int minuteLineLength;//分针长度
     private int secondLineLength;//秒针长度
@@ -47,6 +49,7 @@ public class AnalogClockView extends View {
     private Canvas hourCanvas;
     private Canvas minuteCanvas;
     private Canvas secondCanvas;
+    private Canvas numberCanvas;
 
     private int mCircleColor = Color.WHITE;//圆的颜色
     private int mHourColor = Color.BLACK;//时针的颜色
@@ -95,23 +98,28 @@ public class AnalogClockView extends View {
         reMeasure(widthMeasureSpec, heightMeasureSpec);
         int width = getMeasuredWidth();
         int height = getMeasuredHeight();
+        // 中心位置
         centerX = width / 2 ;
         centerY = height / 2;
+        // 中心距最近边的距离
         radius = Math.min(width, height) / 2;
-
+        // 指针对于上述距离的相对长度
         hourLineLength = radius / 2;
         minuteLineLength = radius * 3 / 4;
         secondLineLength = radius * 3 / 4;
 
-        //时针
+        // 数字
+        numberCanvas = new Canvas();
+
+        // 时针
         hourBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         hourCanvas = new Canvas(hourBitmap);
 
-        //分针
+        // 分针
         minuteBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         minuteCanvas = new Canvas(minuteBitmap);
 
-        //秒针
+        // 秒针
         secondBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         secondCanvas = new Canvas(secondBitmap);
 
@@ -121,10 +129,10 @@ public class AnalogClockView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         //绘制圆
-        canvas.drawCircle(centerX, centerY, radius, circlePaint);  // FIXME:半径减去一半的线宽以避免表盘超出边界
+        canvas.drawCircle(centerX, centerY, radius - CIRCLE_WIDTH/2, circlePaint);  // FIXME:半径减去一半的线宽以避免表盘超出边界
+
         //绘制刻度线
         //TODO 分别绘制分钟刻度和时刻刻度
-        //TODO 当使用空心表盘时，空心圆会与刻度重合:修改整个view的边界大小或调整刻度半径
         for (int i = 0; i < 12; i++) {
             if (i % 3 == 0) {//一刻钟
                 markPaint.setColor(mQuarterMarkColor);
@@ -133,9 +141,9 @@ public class AnalogClockView extends View {
             }
             canvas.drawLine(
                     centerX,
-                    centerY - radius + MARK_GAP,
+                    centerY - radius + MARK_GAP + MARK_WIDTH/2,
                     centerX,
-                    centerY - radius + MARK_GAP + MARK_LENGTH,
+                    centerY - radius + MARK_GAP + MARK_WIDTH/2 + MARK_LENGTH,
                     markPaint);
             canvas.rotate(30, centerX, centerY);
         }
@@ -193,16 +201,23 @@ public class AnalogClockView extends View {
             String currentTime = intAdd0(h) + ":" + intAdd0(minute) + ":" + intAdd0(second);
             onCurrentTimeListener.currentTime(currentTime);
         }
+        // 绘制数字
+        String num = "8";
+        float textWidth = numberPaint.measureText(num);
+        float textHeight = numberPaint.descent() - numberPaint.ascent();
+        float x = centerX;
+        float y = centerY;
+        numberCanvas.drawText(num, x, y, numberPaint);
     }
 
     /**
-     * 初始化
+     * 初始化表盘、指针、刻度的画笔，设置颜色、抗锯齿等属性
      */
     private void init() {
         circlePaint = new Paint();
         circlePaint.setAntiAlias(true);
         circlePaint.setStyle(Paint.Style.STROKE); // 设置圆内空心，而不是填充FILL
-        circlePaint.setStrokeWidth(MARK_WIDTH); // FIXME:设置粗细会超出边框
+        circlePaint.setStrokeWidth(CIRCLE_WIDTH);
         circlePaint.setColor(mCircleColor);
 
         markPaint = new Paint();
@@ -210,6 +225,12 @@ public class AnalogClockView extends View {
         markPaint.setStyle(Paint.Style.FILL);
         markPaint.setStrokeCap(Paint.Cap.ROUND);
         markPaint.setStrokeWidth(MARK_WIDTH);
+
+        numberPaint = new Paint();
+        numberPaint.setAntiAlias(true);
+        numberPaint.setColor(Color.GREEN);
+        numberPaint.setStyle(Paint.Style.FILL);
+        numberPaint.setTextSize(200);
 
         hourPaint = new Paint();
         hourPaint.setAntiAlias(true);
