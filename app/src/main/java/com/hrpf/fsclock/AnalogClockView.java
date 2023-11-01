@@ -121,9 +121,10 @@ public class AnalogClockView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         //绘制圆
-        canvas.drawCircle(centerX, centerY, radius, circlePaint);
+        canvas.drawCircle(centerX, centerY, radius, circlePaint);  // FIXME:半径减去一半的线宽以避免表盘超出边界
         //绘制刻度线
         //TODO 分别绘制分钟刻度和时刻刻度
+        //TODO 当使用空心表盘时，空心圆会与刻度重合:修改整个view的边界大小或调整刻度半径
         for (int i = 0; i < 12; i++) {
             if (i % 3 == 0) {//一刻钟
                 markPaint.setColor(mQuarterMarkColor);
@@ -200,7 +201,8 @@ public class AnalogClockView extends View {
     private void init() {
         circlePaint = new Paint();
         circlePaint.setAntiAlias(true);
-        circlePaint.setStyle(Paint.Style.FILL);
+        circlePaint.setStyle(Paint.Style.STROKE); // 设置圆内空心，而不是填充FILL
+        circlePaint.setStrokeWidth(MARK_WIDTH); // FIXME:设置粗细会超出边框
         circlePaint.setColor(mCircleColor);
 
         markPaint = new Paint();
