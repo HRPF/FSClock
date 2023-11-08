@@ -147,10 +147,22 @@ public class AnalogClockFragment extends Fragment {
      */
     private void setDialogValue(){
         EditText dial_color = settingsView.findViewById(R.id.dial_color);
-        dial_color.setText(preferences.getString("mCircleColor", "#FFFFFF"));
+        dial_color.setText(String.format("#%06X", (0xFFFFFF & clockView.getmCircleColor())));
+
+        Switch Is_DIAL_SOLID = settingsView.findViewById(R.id.is_dial_solid);
+        Is_DIAL_SOLID.setChecked(clockView.getIs_DIAL_SOLID());
 
         EditText mark_width = settingsView.findViewById(R.id.mark_width);
         mark_width.setText(Integer.toString(clockView.getMARK_WIDTH()));
+
+        EditText dial_num = settingsView.findViewById(R.id.dial_num_radius);
+        dial_num.setText(Integer.toString(clockView.getNUM_RADIUS()));
+
+        EditText num_size = settingsView.findViewById(R.id.num_size);
+        num_size.setText(Integer.toString(clockView.getNUM_SIZE()));
+
+        EditText num_color = settingsView.findViewById(R.id.num_color);
+        num_color.setText(String.format("#%06X", (0xFFFFFF & clockView.getNumberColor())));
 
         EditText mark_length = settingsView.findViewById(R.id.mark_length);
         mark_length.setText(Integer.toString(clockView.getMARK_LENGTH()));
@@ -192,8 +204,20 @@ public class AnalogClockFragment extends Fragment {
         EditText dial_color = settingsView.findViewById(R.id.dial_color);
         editor.putString("mCircleColor", dial_color.getText().toString());
 
+        Switch Is_DIAL_SOLID = settingsView.findViewById(R.id.is_dial_solid);
+        editor.putBoolean("Is_DIAL_SOLID", Is_DIAL_SOLID.isChecked());
+
         EditText mark_width = settingsView.findViewById(R.id.mark_width);
         editor.putInt("MARK_WIDTH", Integer.parseInt(mark_width.getText().toString()));
+
+        EditText num_radius = settingsView.findViewById(R.id.dial_num_radius);
+        editor.putInt("NUM_RADIUS", Integer.parseInt(num_radius.getText().toString()));
+
+        EditText num_size = settingsView.findViewById(R.id.num_size);
+        editor.putInt("NUM_SIZE", Integer.parseInt(num_size.getText().toString()));
+
+        EditText num_color = settingsView.findViewById(R.id.num_color);
+        editor.putString("numberColor", num_color.getText().toString());
 
         EditText mark_length = settingsView.findViewById(R.id.mark_length);
         editor.putInt("MARK_LENGTH", Integer.parseInt(mark_length.getText().toString()));
@@ -225,17 +249,24 @@ public class AnalogClockFragment extends Fragment {
         EditText pointer_sec_width = settingsView.findViewById(R.id.pointer_sec_width);
         editor.putInt("SECOND_LINE_WIDTH", Integer.parseInt(pointer_sec_width.getText().toString()));
 
-//        Switch draw_center_circle = settingsView.findViewById(R.id.draw_center_circle);
-//        editor.putString("isDrawCenterCircle", draw_center_circle.get);
+        Switch draw_center_circle = settingsView.findViewById(R.id.draw_center_circle);
+        editor.putBoolean("isDrawCenterCircle", draw_center_circle.isChecked());
+
         editor.apply();
+        setAllSettings();
     }
     /*
     每次绘制前设置值
      */
     private void setAllSettings(){
         clockView.setmCircleColor(Color.parseColor(preferences.getString("mCircleColor", "#FFFFFF")));
+        clockView.setIs_DIAL_SOLID(preferences.getBoolean("Is_DIAL_SOLID", false));
         clockView.setMARK_WIDTH(preferences.getInt("MARK_WIDTH", 16));
         clockView.setMARK_LENGTH(preferences.getInt("MARK_LENGTH", 20));
+        clockView.setNUM_RADIUS(preferences.getInt("NUM_RADIUS", 300));
+        clockView.setNumberColor(Color.parseColor(preferences.getString("numberColor", "#DDDDDD")));
+        clockView.setNUM_SIZE(preferences.getInt("NUM_SIZE", 120));
+        clockView.setNumberColor(Color.parseColor(preferences.getString("numberColor", "#DDDDDD")));
         clockView.setmQuarterMarkColor(Color.parseColor(preferences.getString("mQuarterMarkColor", "#B5B5B5")));
         clockView.setmMinuteMarkColor(Color.parseColor(preferences.getString("mMinuteMarkColor", "#EBEBEB")));
         clockView.setMARK_GAP(preferences.getInt("MARK_GAP", 16));
@@ -253,8 +284,12 @@ public class AnalogClockFragment extends Fragment {
     private void createDefaultSharedPreferences(){
         editor.putBoolean("emptySP", false);
         editor.putString("mCircleColor", "#000000");
+        editor.putBoolean("Is_DIAL_SOLID", false);
         editor.putInt("MARK_WIDTH", 24);
         editor.putInt("MARK_LENGTH", 24);
+        editor.putInt("NUM_RADIUS", 300);
+        editor.putInt("NUM_SIZE", 120);
+        editor.putString("numberColor", "#DDDDDD");
         editor.putString("mQuarterMarkColor","#EBEBEB");
         editor.putString("mMinuteMarkColor", "#A0A0A0");
         editor.putInt("MARK_GAP", 16);

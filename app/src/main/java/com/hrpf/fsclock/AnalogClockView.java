@@ -1,7 +1,7 @@
 package com.hrpf.fsclock;
 
 import android.content.Context;
-import android.icu.text.RelativeDateTimeFormatter;
+import android.graphics.Rect;
 import android.util.Log;
 import android.view.View;
 import android.content.res.TypedArray;
@@ -11,17 +11,15 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.util.AttributeSet;
-import android.view.Window;
 
 import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.RecursiveTask;
 
 public class AnalogClockView extends View {
     private final int DEFAULT_SIZE = 400;//使用wrap_content时默认的尺寸
     private int CIRCLE_WIDTH = 8;//表盘空心状态下外圈宽度
+    private boolean is_DIAL_SOLID = false;//设置表盘是否填充
     private int MARK_WIDTH = 8;//刻度线宽度
     private int MARK_LENGTH = 20;//刻度线长度
     private int MARK_GAP = 16;//刻度线与圆的间隙
@@ -30,7 +28,8 @@ public class AnalogClockView extends View {
     private int SECOND_LINE_WIDTH = 4;//秒针宽度
     private int centerX;//圆心坐标
     private int centerY;
-
+    private int NUM_RADIUS = 300;//表盘数字中心离圆心的距离
+    private int NUM_SIZE = 120;//表盘数字字体大小
     private int radius;//圆半径
     private Paint circlePaint;//圆的画笔
     private Paint markPaint;//刻度线画笔
@@ -49,17 +48,19 @@ public class AnalogClockView extends View {
     private Canvas hourCanvas;
     private Canvas minuteCanvas;
     private Canvas secondCanvas;
-    private Canvas numberCanvas;
 
-    private int mCircleColor = Color.WHITE;//圆的颜色
-    private int mHourColor = Color.BLACK;//时针的颜色
-    private int mMinuteColor = Color.BLACK;//分针的颜色
+    private int mCircleColor = Color.WHITE;//表盘的颜色
+    private int numberColor = Color.GRAY;//表盘数字颜色
+    private int mHourColor = Color.GRAY;//时针的颜色
+    private int mMinuteColor = Color.GRAY;//分针的颜色
     private int mSecondColor = Color.RED;//秒针的颜色
     private int mQuarterMarkColor = Color.parseColor("#B5B5B5");//一刻钟刻度线的颜色
     private int mMinuteMarkColor = Color.parseColor("#EBEBEB");//分钟刻度线的颜色
     private boolean isDrawCenterCircle = true;//是否绘制3个指针的圆心
 
     private static HashMap<String, Integer> map;
+    private boolean hasDrawnStaticContent = false;
+    private Rect textBounds = new Rect();
 
     //获取时间监听
     private OnCurrentTimeListener onCurrentTimeListener;
@@ -91,6 +92,33 @@ public class AnalogClockView extends View {
         init();
     }
 
+    @Override
+    protected void onWindowVisibilityChanged(int visibility) {
+        super.onWindowVisibilityChanged(visibility);
+        Log.i("INFO", "WindowVisibilityChanged: " + visibility);
+        if(visibility == 0) {
+            if(is_DIAL_SOLID)
+                circlePaint.setStyle(Paint.Style.FILL);
+            else
+                circlePaint.setStyle(Paint.Style.STROKE);
+            circlePaint.setStrokeWidth(CIRCLE_WIDTH);
+            circlePaint.setColor(mCircleColor);
+
+            numberPaint.setColor(numberColor);
+            numberPaint.setTextSize(NUM_SIZE);
+
+            markPaint.setStrokeWidth(MARK_WIDTH);
+
+            hourPaint.setColor(mHourColor);
+            hourPaint.setStrokeWidth(HOUR_LINE_WIDTH);
+
+            minutePaint.setColor(mMinuteColor);
+            minutePaint.setStrokeWidth(MINUTE_LINE_WIDTH);
+
+            secondPaint.setColor(mSecondColor);
+            secondPaint.setStrokeWidth(SECOND_LINE_WIDTH);
+        }
+    }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -107,9 +135,6 @@ public class AnalogClockView extends View {
         hourLineLength = radius / 2;
         minuteLineLength = radius * 3 / 4;
         secondLineLength = radius * 3 / 4;
-
-        // 数字
-        numberCanvas = new Canvas();
 
         // 时针
         hourBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
@@ -128,8 +153,36 @@ public class AnalogClockView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        //绘制圆
-        canvas.drawCircle(centerX, centerY, radius - CIRCLE_WIDTH/2, circlePaint);  // FIXME:半径减去一半的线宽以避免表盘超出边界
+        //绘制圆。半径减去一半的线宽以避免表盘超出边界
+        canvas.drawCircle(centerX, centerY, radius - CIRCLE_WIDTH / 2, circlePaint);
+
+        // 绘制数字
+        final String num12 = "12";
+        final String num3 = "3";
+        final String num6 = "6";
+        final String num9 = "9";
+        numberPaint.getTextBounds(num12, 0, num12.length(), textBounds);
+        float textWidth_2 = textBounds.width();
+        float textHeight_2 = textBounds.height();
+        canvas.drawText(num12,
+                centerX - textWidth_2 / 2,
+                centerY + textHeight_2 / 2 - NUM_RADIUS,
+                numberPaint);
+        numberPaint.getTextBounds(num3, 0, num3.length(), textBounds);
+        float textWidth = textBounds.width();
+        float textHeight = textBounds.height();
+        canvas.drawText(num3,
+                centerX - textWidth / 2 + NUM_RADIUS,
+                centerY + textHeight / 2,
+                numberPaint);
+        canvas.drawText(num6,
+                centerX - textWidth / 2,
+                centerY + textHeight / 2 + NUM_RADIUS,
+                numberPaint);
+        canvas.drawText(num9,
+                centerX - textWidth / 2 - NUM_RADIUS,
+                centerY + textHeight / 2,
+                numberPaint);
 
         //绘制刻度线
         //TODO 分别绘制分钟刻度和时刻刻度
@@ -201,13 +254,6 @@ public class AnalogClockView extends View {
             String currentTime = intAdd0(h) + ":" + intAdd0(minute) + ":" + intAdd0(second);
             onCurrentTimeListener.currentTime(currentTime);
         }
-        // 绘制数字
-        String num = "8";
-        float textWidth = numberPaint.measureText(num);
-        float textHeight = numberPaint.descent() - numberPaint.ascent();
-        float x = centerX;
-        float y = centerY;
-        numberCanvas.drawText(num, x, y, numberPaint);
     }
 
     /**
@@ -216,43 +262,30 @@ public class AnalogClockView extends View {
     private void init() {
         circlePaint = new Paint();
         circlePaint.setAntiAlias(true);
-        circlePaint.setStyle(Paint.Style.STROKE); // 设置圆内空心，而不是填充FILL
-        circlePaint.setStrokeWidth(CIRCLE_WIDTH);
-        circlePaint.setColor(mCircleColor);
 
         markPaint = new Paint();
-        circlePaint.setAntiAlias(true);
+        markPaint.setAntiAlias(true);
         markPaint.setStyle(Paint.Style.FILL);
         markPaint.setStrokeCap(Paint.Cap.ROUND);
-        markPaint.setStrokeWidth(MARK_WIDTH);
 
         numberPaint = new Paint();
-        numberPaint.setAntiAlias(true);
-        numberPaint.setColor(Color.GREEN);
         numberPaint.setStyle(Paint.Style.FILL);
-        numberPaint.setTextSize(200);
+        numberPaint.setAntiAlias(true);
 
         hourPaint = new Paint();
         hourPaint.setAntiAlias(true);
-        hourPaint.setColor(mHourColor);
         hourPaint.setStyle(Paint.Style.FILL);
         hourPaint.setStrokeCap(Paint.Cap.ROUND);
-        hourPaint.setStrokeWidth(HOUR_LINE_WIDTH);
 
         minutePaint = new Paint();
         minutePaint.setAntiAlias(true);
-        minutePaint.setColor(mMinuteColor);
         minutePaint.setStyle(Paint.Style.FILL);
         minutePaint.setStrokeCap(Paint.Cap.ROUND);
-        minutePaint.setStrokeWidth(MINUTE_LINE_WIDTH);
 
         secondPaint = new Paint();
         secondPaint.setAntiAlias(true);
-        secondPaint.setColor(mSecondColor);
         secondPaint.setStyle(Paint.Style.FILL);
         secondPaint.setStrokeCap(Paint.Cap.ROUND);
-        secondPaint.setStrokeWidth(SECOND_LINE_WIDTH);
-
     }
 
     /**
@@ -296,14 +329,32 @@ public class AnalogClockView extends View {
 
     public void setmCircleColor(int mCircleColor){
         this.mCircleColor = mCircleColor;
-        circlePaint.setColor(this.mCircleColor);
+        circlePaint.setColor(mCircleColor);
+    }
+    public void setIs_DIAL_SOLID(boolean is_DIAL_SOLID){
+        this.is_DIAL_SOLID = is_DIAL_SOLID;
+        if(is_DIAL_SOLID)
+            circlePaint.setStyle(Paint.Style.FILL);
+        else
+            circlePaint.setStyle(Paint.Style.STROKE);
     }
     public void setMARK_WIDTH(int MARK_WIDTH){
         this.MARK_WIDTH = MARK_WIDTH;
-        markPaint.setStrokeWidth(this.MARK_WIDTH);
+        markPaint.setStrokeWidth(MARK_WIDTH);
     }
     public void setMARK_LENGTH(int MARK_LENGTH){ //绘制时才使用
         this.MARK_LENGTH = MARK_LENGTH;
+    }
+    public void setNUM_RADIUS(int NUM_RADIUS){
+        this.NUM_RADIUS = NUM_RADIUS;
+    }
+    public void setNUM_SIZE(int NUM_SIZE){
+        this.NUM_SIZE = NUM_SIZE;
+        numberPaint.setTextSize(NUM_SIZE);
+    }
+    public void setNumberColor(int numberColor){
+        this.numberColor = numberColor;
+        numberPaint.setColor(numberColor);
     }
     public void setmQuarterMarkColor(int mQuarterMarkColor){ //绘制时才使用
         this.mQuarterMarkColor = mQuarterMarkColor;
@@ -316,26 +367,27 @@ public class AnalogClockView extends View {
     }
     public void setmHourColor(int mHourColor){
         this.mHourColor = mHourColor;
-        hourPaint.setColor(this.mHourColor);
+        hourPaint.setColor(mHourColor);
     }
     public void setmMinuteColor(int mMinuteColor){
         this.mMinuteColor = mMinuteColor;
-        minutePaint.setColor(this.mMinuteColor);
+        minutePaint.setColor(mMinuteColor);
     }
     public void setmSecondColor(int mSecondColor){
         this.mSecondColor = mSecondColor;
+        secondPaint.setColor(mSecondColor);
     }
     public void setHOUR_LINE_WIDTH(int HOUR_LINE_WIDTH){
         this.HOUR_LINE_WIDTH = HOUR_LINE_WIDTH;
-        hourPaint.setStrokeWidth(this.HOUR_LINE_WIDTH);
+        hourPaint.setStrokeWidth(HOUR_LINE_WIDTH);
     }
     public void setMINUTE_LINE_WIDTH(int MINUTE_LINE_WIDTH){
         this.MINUTE_LINE_WIDTH = MINUTE_LINE_WIDTH;
-        minutePaint.setStrokeWidth(this.MINUTE_LINE_WIDTH);
+        minutePaint.setStrokeWidth(MINUTE_LINE_WIDTH);
     }
     public void setSECOND_LINE_WIDTH(int SECOND_LINE_WIDTH){
         this.SECOND_LINE_WIDTH = SECOND_LINE_WIDTH;
-        secondPaint.setStrokeWidth(this.SECOND_LINE_WIDTH);
+        secondPaint.setStrokeWidth(SECOND_LINE_WIDTH);
     }
     public void setisDrawCenterCircle(boolean isDrawCenterCircle){ //绘制时才使用
         this.isDrawCenterCircle = isDrawCenterCircle;
@@ -345,11 +397,23 @@ public class AnalogClockView extends View {
     public int getmCircleColor(){
         return mCircleColor;
     }
+    public boolean getIs_DIAL_SOLID(){
+        return is_DIAL_SOLID;
+    }
     public int getMARK_WIDTH(){
         return MARK_WIDTH;
     }
     public int getMARK_LENGTH(){
         return MARK_LENGTH;
+    }
+    public int getNUM_RADIUS(){
+        return NUM_RADIUS;
+    }
+    public int getNUM_SIZE(){
+        return NUM_SIZE;
+    }
+    public int getNumberColor(){
+        return numberColor;
     }
     public int getmQuarterMarkColor(){
        return mQuarterMarkColor;
