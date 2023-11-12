@@ -39,6 +39,10 @@
 
 FSClock现可通过[Github Release]([Releases · HRPF/FSClock (github.com)](https://github.com/HRPF/FSClock/releases))下载安装
 
+## AIDA64 Remote Sensor 背景主题
+
+含PSD，见 [RemoteSensor Background](./remotesensor)
+
 ## 未来开发计划
 
 [TODO list](TODO.md)
