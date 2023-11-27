@@ -1,4 +1,4 @@
-package com.hrpf.fsclock;
+package com.hrpf.fsclock.fragment;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -19,7 +19,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Switch;
 
-import java.util.Locale;
+import com.hrpf.fsclock.customizeview.AnalogClockView;
+import com.hrpf.fsclock.R;
 
 /**
  * A simple {@link Fragment} subclass.

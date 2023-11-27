@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/black"
     android:keepScreenOn="true"
-    tools:context=".AnalogClockFragment">
+    tools:context=".fragment.AnalogClockFragment">
 
     <WebView
         android:id="@+id/remote_sensor"

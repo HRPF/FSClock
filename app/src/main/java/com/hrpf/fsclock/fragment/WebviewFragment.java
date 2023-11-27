@@ -1,4 +1,4 @@
-package com.hrpf.fsclock;
+package com.hrpf.fsclock.fragment;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -19,6 +19,8 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.EditText;
 import android.widget.ImageButton;
+
+import com.hrpf.fsclock.R;
 
 /**
  * A simple {@link Fragment} subclass.

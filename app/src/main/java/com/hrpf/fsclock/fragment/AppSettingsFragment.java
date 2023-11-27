@@ -1,8 +1,10 @@
-package com.hrpf.fsclock;
+package com.hrpf.fsclock.fragment;
 
 import android.os.Bundle;
 
 import androidx.preference.PreferenceFragmentCompat;
+
+import com.hrpf.fsclock.R;
 
 public class AppSettingsFragment extends PreferenceFragmentCompat {
 

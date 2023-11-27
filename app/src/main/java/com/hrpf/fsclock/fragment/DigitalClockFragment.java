@@ -1,4 +1,4 @@
-package com.hrpf.fsclock;
+package com.hrpf.fsclock.fragment;
 
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
@@ -13,6 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextClock;
+
+import com.hrpf.fsclock.R;
 
 /**
  * A simple {@link Fragment} subclass.

@@ -13,13 +13,15 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.preference.ListPreference;
-import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 
+import com.hrpf.fsclock.fragment.AnalogClockFragment;
+import com.hrpf.fsclock.fragment.AppSettingsFragment;
+import com.hrpf.fsclock.fragment.DigitalClockFragment;
+import com.hrpf.fsclock.fragment.WebviewFragment;
 import com.hrpf.fsclock.service.ScreenControlService;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.hrpf.fsclock;
+package com.hrpf.fsclock.customizeview;
 
 import android.content.Context;
 import android.graphics.Rect;
@@ -11,6 +11,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.util.AttributeSet;
+
+import com.hrpf.fsclock.R;
 
 import java.text.DecimalFormat;
 import java.util.Calendar;

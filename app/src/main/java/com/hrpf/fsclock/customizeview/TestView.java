@@ -1,4 +1,4 @@
-package com.hrpf.fsclock;
+package com.hrpf.fsclock.customizeview;
 
 import android.content.Context;
 import android.view.View;

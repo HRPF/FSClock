@@ -1,10 +1,12 @@
-package com.hrpf.fsclock;
+package com.hrpf.fsclock.receiver;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
 import androidx.preference.PreferenceManager;
+
+import com.hrpf.fsclock.ViewPager;
 
 public class StartReceiver extends BroadcastReceiver {
     public StartReceiver() {
