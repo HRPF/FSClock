@@ -196,4 +196,20 @@ public class ViewPager extends FragmentActivity{
                         | View.SYSTEM_UI_FLAG_FULLSCREEN);
     }
 
+    // 激活设备管理器
+//    public void enableDeviceManager() {
+//        //判断是否激活  如果没有就启动激活设备
+//        if (!devicePolicyManager.isAdminActive(componentName)) {
+//            Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
+//
+//            intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, componentName);
+//            intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION,
+//                    mContext.getString(R.string.dm_extra_add_explanation));
+//            mContext.startActivity(intent);
+//        } else {
+//            Toast.makeText(mContext, "设备已经激活,请勿重复激活", Toast.LENGTH_SHORT).show();
+//        }
+//    }
+
+
 }
