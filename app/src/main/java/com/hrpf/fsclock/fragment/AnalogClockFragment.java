@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import com.hrpf.fsclock.customizeview.AnalogClockView;
 import com.hrpf.fsclock.R;
@@ -42,6 +43,7 @@ public class AnalogClockFragment extends Fragment {
     private String mParam2;
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
+    private int BACK_COLOR = Color.BLACK;
     public AnalogClockFragment() {}
 
     /**
@@ -85,6 +87,7 @@ public class AnalogClockFragment extends Fragment {
             // 使用默认数据创建SP
             createDefaultSharedPreferences();
         }
+        rootview.setBackgroundColor(BACK_COLOR);//设置背景颜色
         return rootview;
     }
 
@@ -105,7 +108,6 @@ public class AnalogClockFragment extends Fragment {
     // 打开设置对话框
     private void onSettings(){
         // https://blog.csdn.net/niohandsome/article/details/53354528
-        Log.i("null", "点击设置");
         if (dialogInstance != null) {
             dialogInstance.show();
             return;
@@ -122,6 +124,7 @@ public class AnalogClockFragment extends Fragment {
             public void onClick(DialogInterface dialogInterface, int i) {
                 // 响应保存按钮
                 saveDialogValue();
+                Toast.makeText(getContext(), "部分设置重启APP后生效", Toast.LENGTH_LONG).show();
             }
         });
         settingsDialogWindow.setNegativeButton("取消", new DialogInterface.OnClickListener(){
@@ -138,6 +141,7 @@ public class AnalogClockFragment extends Fragment {
                 // 恢复默认值
                 createDefaultSharedPreferences();
                 setDialogValue();
+                Toast.makeText(getContext(), "部分设置重启APP后生效", Toast.LENGTH_LONG).show();
             }
         });
         dialogInstance = settingsDialogWindow.create();
@@ -147,11 +151,17 @@ public class AnalogClockFragment extends Fragment {
     从view获取数据并显示于对话框中
      */
     private void setDialogValue(){
+        EditText back_color = settingsView.findViewById(R.id.back_color);
+        back_color.setText(String.format("#%06X", (0xFFFFFF & BACK_COLOR)));
+
         EditText dial_color = settingsView.findViewById(R.id.dial_color);
         dial_color.setText(String.format("#%06X", (0xFFFFFF & clockView.getmCircleColor())));
 
         Switch Is_DIAL_SOLID = settingsView.findViewById(R.id.is_dial_solid);
         Is_DIAL_SOLID.setChecked(clockView.getIs_DIAL_SOLID());
+
+        Switch DISP_NUM = settingsView.findViewById(R.id.disp_num);
+        DISP_NUM.setChecked(clockView.getDISP_NUM());
 
         EditText mark_width = settingsView.findViewById(R.id.mark_width);
         mark_width.setText(Integer.toString(clockView.getMARK_WIDTH()));
@@ -202,11 +212,17 @@ public class AnalogClockFragment extends Fragment {
     从对话框中获取数据保存于sharedpreference中
      */
     private void saveDialogValue(){
+        EditText back_color = settingsView.findViewById(R.id.back_color);
+        editor.putString("backColor", back_color.getText().toString());
+
         EditText dial_color = settingsView.findViewById(R.id.dial_color);
         editor.putString("mCircleColor", dial_color.getText().toString());
 
         Switch Is_DIAL_SOLID = settingsView.findViewById(R.id.is_dial_solid);
         editor.putBoolean("Is_DIAL_SOLID", Is_DIAL_SOLID.isChecked());
+
+        Switch DISP_NUM = settingsView.findViewById(R.id.disp_num);
+        editor.putBoolean("DISP_NUM", DISP_NUM.isChecked());
 
         EditText mark_width = settingsView.findViewById(R.id.mark_width);
         editor.putInt("MARK_WIDTH", Integer.parseInt(mark_width.getText().toString()));
@@ -260,8 +276,10 @@ public class AnalogClockFragment extends Fragment {
     每次绘制前设置值
      */
     private void setAllSettings(){
+        BACK_COLOR = Color.parseColor(preferences.getString("backColor", "#000000"));
         clockView.setmCircleColor(Color.parseColor(preferences.getString("mCircleColor", "#FFFFFF")));
         clockView.setIs_DIAL_SOLID(preferences.getBoolean("Is_DIAL_SOLID", false));
+        clockView.setDISP_NUM(preferences.getBoolean("DISP_NUM", true));
         clockView.setMARK_WIDTH(preferences.getInt("MARK_WIDTH", 16));
         clockView.setMARK_LENGTH(preferences.getInt("MARK_LENGTH", 20));
         clockView.setNUM_RADIUS(preferences.getInt("NUM_RADIUS", 300));
@@ -284,8 +302,10 @@ public class AnalogClockFragment extends Fragment {
      */
     private void createDefaultSharedPreferences(){
         editor.putBoolean("emptySP", false);
+        editor.putString("backColor", "#000000");
         editor.putString("mCircleColor", "#000000");
         editor.putBoolean("Is_DIAL_SOLID", false);
+        editor.putBoolean("DISP_NUM", true);
         editor.putInt("MARK_WIDTH", 24);
         editor.putInt("MARK_LENGTH", 24);
         editor.putInt("NUM_RADIUS", 300);

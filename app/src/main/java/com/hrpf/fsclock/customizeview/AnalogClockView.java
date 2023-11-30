@@ -22,6 +22,7 @@ public class AnalogClockView extends View {
     private final int DEFAULT_SIZE = 400;//使用wrap_content时默认的尺寸
     private int CIRCLE_WIDTH = 8;//表盘空心状态下外圈宽度
     private boolean is_DIAL_SOLID = false;//设置表盘是否填充
+    private boolean DISP_NUM = true;//是否显示数字
     private int MARK_WIDTH = 8;//刻度线宽度
     private int MARK_LENGTH = 20;//刻度线长度
     private int MARK_GAP = 16;//刻度线与圆的间隙
@@ -159,32 +160,34 @@ public class AnalogClockView extends View {
         canvas.drawCircle(centerX, centerY, radius - CIRCLE_WIDTH / 2, circlePaint);
 
         // 绘制数字
-        final String num12 = "12";
-        final String num3 = "3";
-        final String num6 = "6";
-        final String num9 = "9";
-        numberPaint.getTextBounds(num12, 0, num12.length(), textBounds);
-        float textWidth_2 = textBounds.width();
-        float textHeight_2 = textBounds.height();
-        canvas.drawText(num12,
-                centerX - textWidth_2 / 2,
-                centerY + textHeight_2 / 2 - NUM_RADIUS,
-                numberPaint);
-        numberPaint.getTextBounds(num3, 0, num3.length(), textBounds);
-        float textWidth = textBounds.width();
-        float textHeight = textBounds.height();
-        canvas.drawText(num3,
-                centerX - textWidth / 2 + NUM_RADIUS,
-                centerY + textHeight / 2,
-                numberPaint);
-        canvas.drawText(num6,
-                centerX - textWidth / 2,
-                centerY + textHeight / 2 + NUM_RADIUS,
-                numberPaint);
-        canvas.drawText(num9,
-                centerX - textWidth / 2 - NUM_RADIUS,
-                centerY + textHeight / 2,
-                numberPaint);
+        if(DISP_NUM) {
+            final String num12 = "12";
+            final String num3 = "3";
+            final String num6 = "6";
+            final String num9 = "9";
+            numberPaint.getTextBounds(num12, 0, num12.length(), textBounds);
+            float textWidth_2 = textBounds.width();
+            float textHeight_2 = textBounds.height();
+            canvas.drawText(num12,
+                    centerX - textWidth_2 / 2,
+                    centerY + textHeight_2 / 2 - NUM_RADIUS,
+                    numberPaint);
+            numberPaint.getTextBounds(num3, 0, num3.length(), textBounds);
+            float textWidth = textBounds.width();
+            float textHeight = textBounds.height();
+            canvas.drawText(num3,
+                    centerX - textWidth / 2 + NUM_RADIUS,
+                    centerY + textHeight / 2,
+                    numberPaint);
+            canvas.drawText(num6,
+                    centerX - textWidth / 2,
+                    centerY + textHeight / 2 + NUM_RADIUS,
+                    numberPaint);
+            canvas.drawText(num9,
+                    centerX - textWidth / 2 - NUM_RADIUS,
+                    centerY + textHeight / 2,
+                    numberPaint);
+        }
 
         //绘制刻度线
         //TODO 分别绘制分钟刻度和时刻刻度
@@ -340,6 +343,9 @@ public class AnalogClockView extends View {
         else
             circlePaint.setStyle(Paint.Style.STROKE);
     }
+    public void setDISP_NUM(boolean DISP_NUM){
+        this.DISP_NUM = DISP_NUM;
+    }
     public void setMARK_WIDTH(int MARK_WIDTH){
         this.MARK_WIDTH = MARK_WIDTH;
         markPaint.setStrokeWidth(MARK_WIDTH);
@@ -401,6 +407,9 @@ public class AnalogClockView extends View {
     }
     public boolean getIs_DIAL_SOLID(){
         return is_DIAL_SOLID;
+    }
+    public boolean getDISP_NUM(){
+        return DISP_NUM;
     }
     public int getMARK_WIDTH(){
         return MARK_WIDTH;

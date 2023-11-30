@@ -25,6 +25,25 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@string/back_color">
+            </TextView>
+
+            <EditText
+                android:id="@+id/back_color"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_back_color"
+                android:digits="#0123456789ABCDEFabcdef"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="@string/dial_color">
             </TextView>
 
@@ -59,6 +78,22 @@
             android:background="@color/gray_600"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/disp_dial_num" />
+
+            <Switch
+                android:id="@+id/disp_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </Switch>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
