@@ -55,5 +55,6 @@
     </string>
     <string name="cover_system_brightness_summary_off">启用系统自动亮度</string>
     <string name="need_restart">重启后生效</string>
+    <string name="dial_num">表盘数字</string>
 
 </resources>
