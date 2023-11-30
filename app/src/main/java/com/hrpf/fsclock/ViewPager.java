@@ -112,12 +112,16 @@ public class ViewPager extends FragmentActivity{
         offintent.putExtra("screenStatus", false);
         PendingIntent pendingIntent = PendingIntent.getService(this, 0, offintent, PendingIntent.FLAG_UPDATE_CURRENT);
         // 设置定时任务，这里设置为每天早上7点执行一次
+        Calendar calendarNow = Calendar.getInstance();
         Calendar offcalendar = Calendar.getInstance();
         String time_str = appPreferences.getString("screen_off_time", "00:00");
         int hour = Integer.parseInt(time_str.substring(0, 2));
         int min = Integer.parseInt(time_str.substring(3, 5));
         offcalendar.set(Calendar.HOUR_OF_DAY, hour);
         offcalendar.set(Calendar.MINUTE, min);
+        if (offcalendar.before(calendarNow)) {
+            offcalendar.add(Calendar.DATE, 1);
+        }
         long offTime = offcalendar.getTimeInMillis();
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, offTime, AlarmManager.INTERVAL_DAY, pendingIntent);
 
@@ -130,6 +134,9 @@ public class ViewPager extends FragmentActivity{
         int min_on = Integer.parseInt(time_str_on.substring(3, 5));
         oncalendar.set(Calendar.HOUR_OF_DAY, hour_on);
         oncalendar.set(Calendar.MINUTE, min_on);
+        if (offcalendar.after(calendarNow)) {
+            offcalendar.add(Calendar.DATE, 1);
+        }
         long onTime = oncalendar.getTimeInMillis();
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, onTime, AlarmManager.INTERVAL_DAY, pendingIntent2);
 
