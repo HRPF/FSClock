@@ -1,22 +1,22 @@
 <resources>
     <string name="app_name">FSClock</string>
-    <string name="mark_width">刻度粗细:</string>
-    <string name="mark_length">刻度长度:</string>
-    <string name="mark_quarter_color">刻度线颜色(一刻钟):</string>
-    <string name="mark_min_color">刻度线颜色(五分钟):</string>
-    <string name="pointer_hour_color">时针颜色:</string>
-    <string name="pointer_min_color">分针颜色:</string>
-    <string name="pointer_sec_color">秒针颜色:</string>
-    <string name="pointer_hour_width">时针宽度:</string>
-    <string name="pointer_min_width">分针宽度:</string>
-    <string name="pointer_sec_width">秒针宽度:</string>
-    <string name="pointer_center">指针圆心:</string>
-    <string name="dial_color">表盘颜色:</string>
-    <string name="dial_solid">表盘实心:</string>
-    <string name="dial_num_radius">数字中心距:</string>
+    <string name="mark_width">刻度粗细</string>
+    <string name="mark_length">刻度长度</string>
+    <string name="mark_quarter_color">刻度线颜色(一刻钟)</string>
+    <string name="mark_min_color">刻度线颜色(五分钟)</string>
+    <string name="pointer_hour_color">时针颜色</string>
+    <string name="pointer_min_color">分针颜色</string>
+    <string name="pointer_sec_color">秒针颜色</string>
+    <string name="pointer_hour_width">时针宽度</string>
+    <string name="pointer_min_width">分针宽度</string>
+    <string name="pointer_sec_width">秒针宽度</string>
+    <string name="pointer_center">指针圆心</string>
+    <string name="dial_color">表盘颜色</string>
+    <string name="dial_solid">表盘实心</string>
+    <string name="dial_num_radius">数字中心距</string>
     <string name="num_size">数字大小</string>
     <string name="num_color">数字颜色</string>
-    <string name="mark_gap">刻度距离:</string>
+    <string name="mark_gap">刻度距离</string>
     <string name="url">地址URL:</string>
 
     <string name="hint_mark_width">调整表盘刻度线的宽度</string>

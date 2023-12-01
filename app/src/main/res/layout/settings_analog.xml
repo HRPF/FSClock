@@ -13,48 +13,40 @@
         android:orientation="vertical">
         <View
             android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:background="@color/gray_600"
+            android:layout_height="1dp"
+            android:background="@color/android_blue_light"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"/>
 
-        <LinearLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/back_color">
-            </TextView>
-
-            <EditText
+            android:layout_marginBottom="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:hint="@string/back_color">
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/back_color"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_back_color"
                 android:digits="#0123456789ABCDEFabcdef"
                 android:textSize="16sp" />
-        </LinearLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <LinearLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/dial_color">
-            </TextView>
-
-            <EditText
+            android:layout_marginBottom="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:hint="@string/dial_color">
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/dial_color"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_dial_color"
                 android:digits="#0123456789ABCDEFabcdef"
                 android:textSize="16sp" />
-        </LinearLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -74,8 +66,8 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:background="@color/gray_600"
+            android:layout_height="1dp"
+            android:background="@color/android_blue_light"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"/>
 
@@ -95,285 +87,229 @@
             </Switch>
         </LinearLayout>
 
-        <LinearLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/dial_num_radius">
-            </TextView>
-
-            <EditText
+            android:layout_marginBottom="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:hint="@string/dial_num_radius">
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/dial_num_radius"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_dial_num_radius"
                 android:inputType="number"
                 android:textSize="16sp" />
-        </LinearLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <LinearLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/num_size">
-            </TextView>
-
-            <EditText
+            android:layout_marginBottom="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:hint="@string/num_size">
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/num_size"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_num_size"
                 android:inputType="number"
                 android:textSize="16sp" />
-        </LinearLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <LinearLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/num_color">
-            </TextView>
-
-            <EditText
+            android:layout_marginBottom="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:hint="@string/num_color">
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/num_color"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_num_color"
                 android:digits="#0123456789ABCDEFabcdef"
                 android:textSize="16sp" />
-        </LinearLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:background="@color/gray_600"
+            android:layout_height="1dp"
+            android:background="@color/android_blue_light"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"/>
 
-        <LinearLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/mark_width">
-            </TextView>
-
-            <EditText
+            android:layout_marginBottom="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:hint="@string/mark_width">
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/mark_width"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_mark_width"
                 android:inputType="number"
                 android:textSize="16sp" />
-        </LinearLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <LinearLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/mark_length">
-            </TextView>
-
-            <EditText
+            android:layout_marginBottom="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:hint="@string/mark_length">
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/mark_length"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_mark_length"
                 android:inputType="number"
                 android:textSize="16sp" />
-        </LinearLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <LinearLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/mark_gap">
-            </TextView>
-
-            <EditText
+            android:layout_marginBottom="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:hint="@string/mark_gap">
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/mark_gap"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/mark_gap_hint"
                 android:inputType="number"
                 android:textSize="16sp" />
-        </LinearLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <LinearLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/mark_quarter_color">
-            </TextView>
-
-            <EditText
+            android:layout_marginBottom="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:hint="@string/mark_quarter_color">
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/mark_quarter_color"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_mark_quarter_color"
                 android:digits="#0123456789ABCDEFabcdef"
                 android:textSize="16sp" />
-        </LinearLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <LinearLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/mark_min_color">
-            </TextView>
-
-            <EditText
+            android:layout_marginBottom="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:hint="@string/mark_min_color">
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/mark_min_color"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_mark_min_color"
                 android:digits="#0123456789ABCDEFabcdef"
                 android:textSize="16sp" />
-        </LinearLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:background="@color/gray_600"
+            android:layout_height="1dp"
+            android:background="@color/android_blue_light"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp" />
 
-        <LinearLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/pointer_hour_color">
-            </TextView>
-
-            <EditText
+            android:layout_marginBottom="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:hint="@string/pointer_hour_color">
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/pointer_hour_color"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_pointer_hour_color"
                 android:digits="#0123456789ABCDEFabcdef"
                 android:textSize="16sp" />
-        </LinearLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <LinearLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/pointer_min_color">
-            </TextView>
-
-            <EditText
+            android:layout_marginBottom="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:hint="@string/pointer_min_color">
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/pointer_min_color"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_pointer_min_color"
                 android:digits="#0123456789ABCDEFabcdef"
                 android:textSize="16sp" />
-        </LinearLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <LinearLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/pointer_sec_color">
-            </TextView>
-
-            <EditText
+            android:layout_marginBottom="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:hint="@string/pointer_sec_color">
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/pointer_sec_color"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_pointer_sec_color"
                 android:digits="#0123456789ABCDEFabcdef"
                 android:textSize="16sp" />
-        </LinearLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <LinearLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/pointer_hour_width">
-            </TextView>
-
-            <EditText
+            android:layout_marginBottom="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:hint="@string/pointer_hour_width">
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/pointer_hour_width"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_pointer_hour_width"
                 android:digits="#0123456789ABCDEFabcdef"
                 android:textSize="16sp" />
-        </LinearLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <LinearLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/pointer_min_width">
-            </TextView>
-
-            <EditText
+            android:layout_marginBottom="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:hint="@string/pointer_min_width">
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/pointer_min_width"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_pointer_min_width"
                 android:digits="#0123456789ABCDEFabcdef"
                 android:textSize="16sp" />
-        </LinearLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <LinearLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/pointer_sec_width">
-            </TextView>
-
-            <EditText
+            android:layout_marginBottom="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:hint="@string/pointer_sec_width">
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/pointer_sec_width"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_pointer_sec_width"
                 android:digits="#0123456789ABCDEFabcdef"
                 android:textSize="16sp" />
-        </LinearLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
