@@ -137,7 +137,7 @@ public class WebviewFragment extends Fragment {
         if (settingsView.getParent() != null) {
             ((ViewGroup) settingsView.getParent()).removeView(settingsView);
         }
-        AlertDialog.Builder settingsDialogWindow = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder settingsDialogWindow = new AlertDialog.Builder(getActivity(), R.style.CustomDialogStyle);
         settingsDialogWindow.setView(settingsView);
         settingsDialogWindow.setTitle("监控设置");
         EditText url_text = settingsView.findViewById(R.id.url_text);

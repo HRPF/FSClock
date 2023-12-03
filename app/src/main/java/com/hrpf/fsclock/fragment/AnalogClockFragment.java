@@ -115,7 +115,7 @@ public class AnalogClockFragment extends Fragment {
         if (settingsView.getParent() != null) {
             ((ViewGroup) settingsView.getParent()).removeView(settingsView);
         }
-        AlertDialog.Builder settingsDialogWindow = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder settingsDialogWindow = new AlertDialog.Builder(getActivity(), R.style.CustomDialogStyle);
         settingsDialogWindow.setView(settingsView);
         settingsDialogWindow.setTitle("自定义模拟时钟");
         setDialogValue();

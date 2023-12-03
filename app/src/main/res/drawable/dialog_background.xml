@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <corners android:radius="20dp" /> <!-- 你可以调整这里的半径来改变圆角的大小 -->
+    <solid android:color="@android:color/white" /> <!-- 对话框背景颜色 -->
+</shape>
