@@ -5,14 +5,20 @@
     android:layout_height="match_parent"
     tools:context=".fragment.BlankFragment">
 
-    <TextView
-        android:id="@+id/temp_text"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+<!--    <TextView-->
+<!--        android:id="@+id/temp_text"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent" />-->
 
-    <com.hrpf.fsclock.customizeview.TestView
+<!--    <com.hrpf.fsclock.customizeview.TestView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content" >-->
+<!--    </com.hrpf.fsclock.customizeview.TestView>-->
+
+    <Button
+        android:id="@+id/active_arc"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
-    </com.hrpf.fsclock.customizeview.TestView>
+        android:layout_height="wrap_content"
+        android:text="激活SDK" />
 
 </FrameLayout>

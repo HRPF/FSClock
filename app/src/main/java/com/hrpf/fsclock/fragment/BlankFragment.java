@@ -69,7 +69,7 @@ public class BlankFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        TextView text = view.findViewById(R.id.temp_text);
-        text.setText(this.mParam1);
+//        TextView text = view.findViewById(R.id.temp_text);
+//        text.setText(this.mParam1);
     }
 }
