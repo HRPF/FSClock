@@ -22,6 +22,7 @@ import com.hrpf.fsclock.fragment.AnalogClockFragment;
 import com.hrpf.fsclock.fragment.AppSettingsFragment;
 import com.hrpf.fsclock.fragment.DigitalClockFragment;
 import com.hrpf.fsclock.fragment.WebviewFragment;
+import com.hrpf.fsclock.fragment.BlankFragment;
 import com.hrpf.fsclock.service.ScreenControlService;
 
 import java.util.ArrayList;
@@ -66,12 +67,12 @@ public class ViewPager extends FragmentActivity{
         AppSettingsFragment fgm0 = AppSettingsFragment.newInstance();
         DigitalClockFragment fgm1 = DigitalClockFragment.newInstance("fgm1", "");
         AnalogClockFragment fgm2 = AnalogClockFragment.newInstance("fgm2", "");
-        // BlankFragment test_fgm = BlankFragment.newInstance("Test Fragment", "");
+        BlankFragment test_fgm = BlankFragment.newInstance("Test Fragment", "");
 
         fragmentList.add(fgm0);
         fragmentList.add(fgm1);
         fragmentList.add(fgm2);
-        // fragmentList.add(test_fgm);
+        fragmentList.add(test_fgm);
 
         boolean enable_remote_sensor = appPreferences.getBoolean("enable_remote_sensor", false);
         if(enable_remote_sensor) {
